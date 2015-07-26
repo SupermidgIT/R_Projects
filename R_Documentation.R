@@ -106,5 +106,19 @@ my_matrix2 <- matrix( 1:20, nrow = 4, ncol = 5)
 ## != operator tests whether two values are unequal.
  ## == operator tests whether two boolean values or numbers are equal.
   ## ! not operator negates logical expressions so that TRUE expressions become FALSE and FALSE expressions become TRUE.
-   ##
- 
+   
+## Sys.Date() returns a value based on your computer's enviorment, while other functions manipulate imput data in order to compute a retuen value.
+ ## mean() takes a vector of numbers as imput, returns the average of all of the numbers in the imput mi. Imputs to function are often called arguments. Providing arguments to a function is also sometimes called passing arguments to that function. arguments you want to pass to a function go inside the function's parentheses.
+
+## sd this function computes the standard deviation of the values in x. If na.rm is TRUE then missing values are removed before computation proceeds.
+
+evaluate(function(x){x+1}, 6)
+ ##The first argument is a tiny anonymous function that takes one argument `x` and returns `x+1`. We passed the number 6 into this function so the entire expression evaluates to 7.
+
+## head() function to see the first six lines of the dataset.
+  ## dim() to check the dimensions of the dataset.
+    ## lapply() function takes a list as imput, applies a function to each element of the list, then returns a list of the same length as the original one. Since a data frame is really just a list of vectors (you can see this with as.list(flags)), we can use lapply() to apply the class() function to each colum of the flags dataset. Let's see it in action!
+cls_list <- lapply(flags, class)
+ ## the l in lapply stands for list.
+
+##unique() returns a vector, data frame or array like x but with duplicate elements/rows removed.
