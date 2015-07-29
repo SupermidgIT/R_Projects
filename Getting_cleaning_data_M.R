@@ -3,7 +3,7 @@ Getting and Cleaning data
 packageVersion(x) ### returns version of specified package
 
 tbl_df(x) ### Load data into dplyr data frame
-  ### tbl_df is an informative and compact data frame format
+### tbl_df is an informative and compact data frame format
 
 rm("x") ### removes r object from Global environment
 
@@ -43,4 +43,3 @@ mutate(cran3, size_mb = size / 2^20)
 
 summarize()   # Quickbly collapses the dataset to a single row.
   # useful to calculate quick descriptive statistics of a variable or column
-
