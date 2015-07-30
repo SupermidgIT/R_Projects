@@ -1,4 +1,9 @@
-Getting and Cleaning data
+###Getting and Cleaning data
+
+###Suggested Readings
+
+### http://vita.had.co.nz/papers/tidy-data.pdf
+
 ### Working with dplyr
 packageVersion(x) ### returns version of specified package
 
@@ -43,3 +48,36 @@ mutate(cran3, size_mb = size / 2^20)
 
 summarize()   # Quickbly collapses the dataset to a single row.
   # useful to calculate quick descriptive statistics of a variable or column
+
+group_by() ## groups rows based on a variable or column to perform analysis
+by_package <- group_by(cran, package)
+  summarize(by_package, mean(size)) ## takes the mean for size for each package
+  pack_sum <- summarize(by_package,
+                        count = n(),
+                        unique = n_distinct(ip_id),
+                        countries = n_distinct(country),
+                        avg_bytes = mean(size)) ## R version of a pivot table,
+                        ## creates a column for each argument
+  quantile(pack_sum$count, probs = 0.99) ## splits data into top 1% and bottom 99%
+  top_counts <- filter(pack_sum, count > 679) ## filters for the top 1% of packages
+  arrange(top_counts, desc(count))
+  
+### %>% is a special chaining operator, pronounced as then
+  # code to the right of %>% operates on result from the code to the left of %>%
+  result3 <-
+    cran %>%
+    group_by(package) %>%
+    summarize(count = n(),
+              unique = n_distinct(ip_id),
+              countries = n_distinct(country),
+              avg_bytes = mean(size)
+    ) %>%
+    filter(countries > 60) %>%
+    arrange(desc(countries), avg_bytes)
+  
+  cran %>% ## Takes the cran data frame
+    select(ip_id, country, package, size) %>% ## selects the following columns
+    mutate(size_mb = size / 2^20) %>% ## creates a new calculated column
+    filter(size_mb <= 0.5) %>% ## retrieves all the rows where size_mb is less than or equal to 0.5
+    arrange(desc(size_mb)) %>% ## sorts the columns in descending order by size_mb
+    print
