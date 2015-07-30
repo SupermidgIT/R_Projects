@@ -108,6 +108,10 @@ my_matrix2 <- matrix( 1:20, nrow = 4, ncol = 5)
   ## ! not operator negates logical expressions so that TRUE expressions become FALSE and FALSE expressions become TRUE.
    
 ## Sys.Date() returns a value based on your computer's enviorment, while other functions manipulate imput data in order to compute a retuen value.
+
+as.Date() ## reference a date.
+  as.Date("1969-01-01")
+
  ## mean() takes a vector of numbers as imput, returns the average of all of the numbers in the imput mi. Imputs to function are often called arguments. Providing arguments to a function is also sometimes called passing arguments to that function. arguments you want to pass to a function go inside the function's parentheses.
 
 ## sd this function computes the standard deviation of the values in x. If na.rm is TRUE then missing values are removed before computation proceeds.
@@ -115,8 +119,13 @@ my_matrix2 <- matrix( 1:20, nrow = 4, ncol = 5)
 evaluate(function(x){x+1}, 6)
  ##The first argument is a tiny anonymous function that takes one argument `x` and returns `x+1`. We passed the number 6 into this function so the entire expression evaluates to 7.
 
-## head() function to see the first six lines of the dataset.
-  ## dim() to check the dimensions of the dataset.
+head() ## by default it shows the first 6 rows of a dataset. 
+ head(x, 10) ## you can alter this behavior by passing a second argument the number of rows you'd like to view.
+ 
+tail() ## will show the last 6 rows of the dataset.
+  tail(x, 10) ## will alter the amout of rows you want to show.
+  
+  ## dim() to check the dimensions of the dataset.(rows and columns)
     ## lapply() function takes a list as imput, applies a function to each element of the list, then returns a list of the same length as the original one. Since a data frame is really just a list of vectors (you can see this with as.list(flags)), we can use lapply() to apply the class() function to each colum of the flags dataset. Let's see it in action!
 cls_list <- lapply(flags, class)
  ## the l in lapply stands for list.
@@ -125,3 +134,72 @@ cls_list <- lapply(flags, class)
 
 ## vapply() is similar to sapply, but has a pre-specified type od return value, so it can be safer (and sometimes faster) to use.
 ## tapply() Apply a function to each cell of a ragged array, that is each (non-empty) group values given by a unique combination of the levels of certain factors.
+
+object.size() ## used to see how much memory your dataset is occupying.
+
+summary() ## provides different output for each variable, depending on its class. for numeric data summary() displays the minimum, 1st quartitle, meadian, mean, 3rd quartitle, and maximum. These values help us understand how the data are distributed.
+
+str() ## tells you the class, the oberservations and veriables (rows, columns), name and class of each variable, as well as a preview of its contents. 
+
+sample() ## take a sample of the specified size from the elements of x using either with or without replacement.
+ sample(1:6, 4, replace = TRUE) ## is and example for rolling a six sided die. 
+  ## replace means that each number is replaced after it is selected, so that the same number can show up more that once.
+
+ flips <- sample(c(0,1), 100, replace = TRUE, prob = c(0.3,0.7))
+ ## this is an example of trying to simulate 100 flips of an unfair two-sided coin. This prticular coin has a 0.3 probability of landing 'tails' and a 0.7 probability of landing 'heads'.
+ 
+rbinom() ## stands for random binormal variable
+  ## represents the number of 'successes' in a given number of independent 'trials'. 
+
+  rbinom(1, size = 100, prob = 0.7)
+  ## represents the number of heads in 100 flips of our unfair coin.
+
+rnorm() ## to sumulate random numbers from many other probability distributions.
+  
+rpois() ## Density, distrabution function, quantile function and random generation for the Poission distribution with parameter lambda.
+lambda argument ## vector of (non-negative) means.
+
+  rpois(5, lambda = 10)
+  
+  my_pois <- replicate(100, rpois(5,10))
+  ## now we can get the mean of each column in my_pois using the colMeans() fucntion
+    cm <- colMeans(my_pois)
+    
+POSIXct ## represents the (signed) number of seconds since the beginning of 1970 (in the UTC time zone) as a numeric vector.
+POSIXlt ## is a named list of vectors representing.
+
+weekdays() ## will return the day of week from any date or time object.
+months() ## will return the month on any date or time object.
+quarters() ## returns the quarter of the year (Q1-Q4).
+
+strptime() ## converts character vectors to POSIXlt.
+  ## similar to as.POSIXlt(), except that the input doesn't have to be in a particular format (YYYY-MM-DD)
+
+%B ## full month name in the current locale.
+%d ## day of the month as decimal number.
+%Y ## year with century.
+%H ## hours as decimal number (00-23).
+%M ## minute as a decimal number (00-59).
+
+t3 <- "October 17, 1986 08:24"
+
+t4 <- strftime(t3, "%B %d, %Y %H %M")
+  
+t4
+  [1] "1986-10-17 08:24:00 MDT"
+
+difftime() ## allows you to specify a 'units' parameter.
+
+  difftime(Sys.time(), t1, units = 'days')
+    Time difference of 0.3210728 days
+    
+xlab ## to title the x-axis
+ylab ## to title the y-axis
+col = ## to color the plots
+xlim ## to limit the x-axis
+  xlim = c(10, 15)
+ylim ## to limit the y-axis
+pch = ## to change the shape of the symbols
+
+boxplot() ## produce a box-and-whisker plots of the given grouped values.
+
