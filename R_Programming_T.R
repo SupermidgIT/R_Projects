@@ -203,3 +203,7 @@ pch = ## to change the shape of the symbols
 
 boxplot() ## produce a box-and-whisker plots of the given grouped values.
 
+as.character() ## Create or test for objects of type "character".
+
+
+
